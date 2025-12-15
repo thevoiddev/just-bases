@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - Just Bases</title>
+    <meta name="description" content="Личный кабинет участника олимпиады Just Bases">
+    <meta name="keywords" content="личный кабинет, профиль, олимпиады, участник">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="./assets/styles/dashboard.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navigation-menu" role="navigation">
+            <div class="wrapper">
+                <a href="./index.html" class="logo-link">
+                    <span class="logo-text">JustBases</span>
+                </a>
+                <div class="navigation-menu_links">
+                    <a href="./index.html">Главная</a>
+                    <span id="userNameNav" style="color: #71DA41;"></span>
+                    <button id="logoutBtnHeader" class="logout-btn-header">Выход</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="./assets/images/logo.webp" alt="Логотип" class="sidebar-logo">
+                <h2>Just Bases</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="olympiads">
+                    <span>📚</span> Олимпиады
+                </a>
+                <a href="#" class="nav-item" data-section="registered">
+                    <span>✓</span> Мои олимпиады
+                </a>
+                <a href="#" class="nav-item" data-section="profile">
+                    <span>👤</span> Профиль
+                </a>
+                <a href="#" class="nav-item" data-section="admin" id="adminLink" style="display: none;">
+                    <span>⚙️</span> Администрирование
+                </a>
+            </nav>
+
+            <button id="logoutBtn" class="logout-btn">Выход</button>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1 id="pageTitle">Олимпиады</h1>
+                <div class="user-info">
+                    <span id="userName">Пользователь</span>
+                </div>
+            </div>
+
+            <section id="olympiads" class="section active">
+                <div class="section-header">
+                    <h2>Доступные олимпиады</h2>
+                </div>
+                <div id="olympiadsList" class="olympiads-grid">
+                    <div class="loading">Загрузка...</div>
+                </div>
+            </section>
+
+            <section id="registered" class="section">
+                <div class="section-header">
+                    <h2>Мои олимпиады</h2>
+                </div>
+                <div id="registeredList" class="olympiads-grid">
+                    <div class="loading">Загрузка...</div>
+                </div>
+            </section>
+
+            <section id="profile" class="section">
+                <div class="section-header">
+                    <h2>Профиль</h2>
+                </div>
+                <div class="profile-form">
+                    <div class="form-group">
+                        <label for="profileFirstName">Имя</label>
+                        <input type="text" id="profileFirstName" placeholder="Имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileLastName">Фамилия</label>
+                        <input type="text" id="profileLastName" placeholder="Фамилия">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmail">Email</label>
+                        <input type="email" id="profileEmail" placeholder="Email" disabled>
+                    </div>
+                    <button id="updateProfileBtn" class="btn-primary">Сохранить изменения</button>
+                </div>
+            </section>
+
+            <section id="admin" class="section">
+                <div class="section-header">
+                    <h2>Администрирование</h2>
+                    <button id="createOlympiadBtn" class="btn-primary">+ Создать олимпиаду</button>
+                </div>
+
+                <div id="adminTabs" class="admin-tabs">
+                    <button class="tab-btn active" data-tab="olympiads-admin">Олимпиады</button>
+                    <button class="tab-btn" data-tab="users-admin">Пользователи</button>
+                </div>
+
+                <div id="olympiads-admin" class="admin-tab-content active">
+                    <div id="adminOlympiadsList" class="olympiads-grid">
+                        <div class="loading">Загрузка...</div>
+                    </div>
+                </div>
+
+                <div id="users-admin" class="admin-tab-content">
+                    <div id="adminUsersList" class="users-table">
+                        <div class="loading">Загрузка...</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="olympiadModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Информация об олимпиаде</h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <div id="createOlympiadModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Создать олимпиаду</h2>
+            <form id="createOlympiadForm" class="form">
+                <div class="form-group">
+                    <label for="olympiadName">Название</label>
+                    <input type="text" id="olympiadName" required>
+                </div>
+                <div class="form-group">
+                    <label for="olympiadDescription">Описание</label>
+                    <textarea id="olympiadDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="olympiadLocation">Место проведения</label>
+                    <input type="text" id="olympiadLocation" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="olympiadStartDate">Дата начала</label>
+                        <input type="datetime-local" id="olympiadStartDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="olympiadEndDate">Дата окончания</label>
+                        <input type="datetime-local" id="olympiadEndDate" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="olympiadMaxParticipants">Макс. участников</label>
+                    <input type="number" id="olympiadMaxParticipants" required>
+                </div>
+                <button type="submit" class="btn-primary">Создать</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="wrapper">
+            <p>&copy; 2024 Just Bases. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "mj6fwb952azllebz3wt",
+    "firstName": "Admin",
+    "lastName": "User",
+    "email": "admin@justbases.com",
+    "password": "$2a$10$Hd5/y7xQ4S/DhJCZAIXNju6L8t2mAJoG.eJuZIE25PTaaDG.DwW2W",
+    "role": "admin",
+    "registeredOlympiads": [],
+    "createdAt": "2025-12-15T00:52:54.167Z"
+  }
+]
